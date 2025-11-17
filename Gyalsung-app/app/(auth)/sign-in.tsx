@@ -1,199 +1,361 @@
+// import { ThemedText } from "@/components/themed-text";
+// import { ThemedView } from "@/components/themed-view";
+// import { COLORS } from "@/constants/colors";
+// import { Feather as Icon, Ionicons } from "@expo/vector-icons";
+// import { useRouter } from "expo-router";
+// import { useState } from "react";
+// import {
+//   Platform,
+//   StyleSheet,
+//   Text,
+//   TextInput,
+//   TouchableOpacity,
+//   View,
+// } from "react-native";
+// import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+// import { SafeAreaView } from "react-native-safe-area-context";
+
+// export default function Page() {
+//   const router = useRouter();
+
+//   const [emailAddress, setEmailAddress] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [showPassword, setShowPassword] = useState(false);
+//   const [error, setError] = useState("");
+
+//   return (
+//     <KeyboardAwareScrollView
+//       style={{ flex: 1 }}
+//       contentContainerStyle={{ flexGrow: 1 }}
+//       enableAutomaticScroll={true}
+//       // extraScrollHeight={10}
+//       keyboardShouldPersistTaps="handled"
+//       enableOnAndroid={Platform.OS === "android" || Platform.OS === "ios"}
+//     >
+//        <SafeAreaView style={{ flex: 1 }}>
+//       <ThemedView style={styles.container}>
+//         {/* Back Arrow */}
+//         <TouchableOpacity
+//           onPress={() => router.back()}
+//           style={styles.backButton}
+//         >
+//           <Ionicons name="arrow-back" size={26} color={COLORS.text} />
+//         </TouchableOpacity>
+
+//         {/* Title */}
+//         <ThemedText style={styles.title}>Login</ThemedText>
+//         <View style={styles.fieldContainer}>
+//           {/* Name Label */}
+//           <ThemedText style={styles.label}>Name</ThemedText>
+//           <TextInput
+//             value={emailAddress}
+//             onChangeText={setEmailAddress}
+//             placeholder="Your Name"
+//             placeholderTextColor="#555"
+//             style={styles.underlineInput}
+//           />
+
+//           {/* Password Label */}
+//           <Text style={styles.label}>Password</Text>
+//           <View style={styles.passwordUnderlineContainer}>
+//             <TextInput
+//               value={password}
+//               onChangeText={setPassword}
+//               secureTextEntry={!showPassword}
+//               placeholder="Password"
+//               placeholderTextColor="#555"
+//               style={styles.passwordInput}
+//             />
+
+//             <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+//               <Icon
+//                 name={showPassword ? "eye" : "eye-off"}
+//                 size={20}
+//                 color="#555"
+//               />
+//             </TouchableOpacity>
+//           </View>
+
+//           {/* Login Button */}
+//           <TouchableOpacity style={styles.loginButton} onPress={() => {}}>
+//             <Text style={styles.loginButtonText}>Login</Text>
+//           </TouchableOpacity>
+//         </View>
+//       </ThemedView>
+//       </SafeAreaView>
+//     </KeyboardAwareScrollView>
+//   );
+// }
+
+// export const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: "pink",
+//       // backgroundColor: COLORS.background,
+//     paddingHorizontal: 25,
+//     paddingTop: 50,
+//      paddingBottom: 40,
+//   },
+//   fieldContainer: {
+//     flex: 1,
+//     justifyContent: "center",
+//     gap: 12,
+//   },
+//   backButton: {
+//     position: "absolute",
+//     top: 40,
+//     left: 20,
+//     zIndex: 10,
+//   },
+
+//   title: {
+//     fontSize: 32,
+//     fontWeight: "bold",
+//     color: COLORS.text,
+//     marginVertical: 30,
+//     marginBottom: 20,
+//     textAlign: "center",
+//   },
+
+//   label: {
+//     fontSize: 15,
+//     color: COLORS.text,
+//     marginTop: 20,
+//     marginBottom: 5,
+//   },
+
+//   underlineInput: {
+//     borderBottomWidth: 1,
+//     borderColor: COLORS.text,
+//     fontSize: 16,
+//     paddingVertical: 6,
+//     color: COLORS.text,
+//   },
+
+//   /** 🔹 NEW PASSWORD FIELD STYLES (MATCHES NAME INPUT) */
+//   passwordUnderlineContainer: {
+//     flexDirection: "row",
+//     alignItems: "center",
+//     borderBottomWidth: 1,
+//     borderColor: COLORS.text,
+//   },
+
+//   passwordInput: {
+//     flex: 1,
+//     fontSize: 16,
+//     paddingVertical: 6,
+//     color: COLORS.text,
+//   },
+
+//   loginButton: {
+//     backgroundColor: COLORS.primary,
+//     paddingVertical: 14,
+//     borderRadius: 30,
+//     marginTop: 40,
+//     alignItems: "center",
+//   },
+
+//   loginButtonText: {
+//     color: COLORS.white,
+//     fontSize: 18,
+//     fontWeight: "600",
+//   },
+// });
+
+import { Feather as Icon, Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
+import { useState } from "react";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { COLORS } from "@/constants/colors";
-import { Ionicons } from "@expo/vector-icons";
-import { Link, useRouter } from "expo-router";
-import { useState } from "react";
-import { StyleSheet, TextInput, TouchableOpacity, View,Text } from "react-native";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { Platform } from 'react-native';
 
-
-export default function Page() {
+export default function LoginPage() {
   const router = useRouter();
 
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <KeyboardAwareScrollView
-      style={{ flex: 1 }}
-      contentContainerStyle={{ flexGrow: 1 }}
-      enableAutomaticScroll={true}
-      extraScrollHeight={10}
-      keyboardShouldPersistTaps="handled"
-      enableOnAndroid={Platform.OS === 'android' || Platform.OS === 'ios'}
-      // keyboardOpeningTime={1}
+    <SafeAreaView style={styles.safeArea}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.keyboardAvoider}
       >
-      <ThemedView style={styles.container}>
-        {/* <Image
-          source={require("../../assets/images/splash-icon.png")}
-          style={styles.illustration}
-          /> */}
-         
-          <ThemedText style={styles.title}>Log in</ThemedText>
-          
-
-        {error ? (
-          <ThemedView style={styles.errorBox}>
-            <Ionicons name="alert-circle" size={20} />
-
-            <ThemedText style={styles.errorText}> {error} </ThemedText>
-            <TouchableOpacity onPress={() => setError("")}>
-              <Ionicons name="close-circle" size={20} />
-            </TouchableOpacity>
-          </ThemedView>
-        ) : null}
-
-        <TextInput
-          style={[styles.input, error && styles.errorInput]}
-          autoCapitalize="none"
-          value={emailAddress}
-          placeholder="Enter email"
-          placeholderTextColor="#9a8478"
-          onChangeText={(emailAddress) => setEmailAddress(emailAddress)}
-        />
-        <TextInput
-          style={[styles.input, error && styles.errorInput]}
-          value={password}
-          placeholder="Enter password"
-          secureTextEntry={true}
-          placeholderTextColor="#9a8478"
-          onChangeText={(password) => setPassword(password)}
-        />
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            ("");
-          }}
-        >
-          <ThemedText style={styles.buttonText}>Continue</ThemedText>
-        </TouchableOpacity>
-      <View style={styles.footerContainer}>
-        <ThemedText style={styles.footerText}>
-          Don't have an account?
-        </ThemedText>
-        <Link href="/sign-up" asChild>
-          <TouchableOpacity>
-            <ThemedText style={styles.linkText}>sign up</ThemedText>
+        <ThemedView style={styles.container}>
+          {/* Back Button */}
+          <TouchableOpacity onPress={router.back} style={styles.backButton}>
+            <Ionicons name="arrow-back" size={26} color={COLORS.text} />
           </TouchableOpacity>
-        </Link>
-      </View>
-      </ThemedView>
-    </KeyboardAwareScrollView>
+
+          {/* Title */}
+          <ThemedText style={styles.title}>Login</ThemedText>
+
+          {/* Form */}
+          <View style={styles.form}>
+            {/* Name Field */}
+            <ThemedText style={styles.label}>Name</ThemedText>
+            <TextInput
+              value={emailAddress}
+              onChangeText={setEmailAddress}
+              placeholder="Your Name"
+              placeholderTextColor="#555"
+              style={styles.inputUnderline}
+            />
+
+            {/* Password Field */}
+            <ThemedText style={styles.label}>Password</ThemedText>
+
+            <View style={styles.passwordContainer}>
+              <TextInput
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry={!showPassword}
+                placeholder="Password"
+                placeholderTextColor="#555"
+                style={styles.passwordInput}
+              />
+
+              <TouchableOpacity
+                onPress={() => setShowPassword((prev) => !prev)}
+              >
+                <Icon
+                  name={showPassword ? "eye" : "eye-off"}
+                  size={20}
+                  color="#2E7D32"
+                />
+              </TouchableOpacity>
+            </View>
+            {/* forgot password */}
+            <View style={styles.forgotText}>
+              <TouchableOpacity onPress={() => router.push("/sign-up")}>
+                <Text style={{ color: COLORS.primary, fontWeight: "600" }}>
+                  Forgot Password
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+            {/* Login Button */}
+            <TouchableOpacity style={styles.loginButton}>
+              <Text style={styles.loginButtonText}>Login</Text>
+            </TouchableOpacity>
+            <View style={styles.signUpText}>
+              <Text style={{ color: COLORS.text }}>Don't have an account?</Text>
+
+              <TouchableOpacity onPress={() => router.push("/sign-up")}>
+                <Text style={{ color: COLORS.primary, fontWeight: "600" }}>
+                  Sign up
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </ThemedView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }
 
-export const styles = StyleSheet.create({
-  container: {
+const styles = StyleSheet.create({
+  safeArea: {
     flex: 1,
     backgroundColor: COLORS.background,
-    // paddingTop: 150,
-    padding: 20,
-    justifyContent: "center",
   },
-  illustration: {
-    width: 310,
-    height: 310,
-    resizeMode: "contain",
 
-    alignSelf: "center",
+  keyboardAvoider: {
+    flex: 1,
   },
+
+  container: {
+    flex: 1,
+    paddingHorizontal: 25,
+    paddingTop: 40,
+    backgroundColor: COLORS.background,
+  },
+
+  backButton: {
+    position: "absolute",
+    top: 20,
+    left: 10,
+    zIndex: 10,
+  },
+
   title: {
     fontSize: 32,
     fontWeight: "bold",
     color: COLORS.text,
-    marginVertical: 30,
     textAlign: "center",
-    // textDecorationLine: "underline",
+    marginTop: 20,
+    marginBottom: 25,
   },
-  input: {
-    backgroundColor: COLORS.white,
-    borderRadius: 12,
-    padding: 15,
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: COLORS.border,
+
+  form: {
+    flex: 1,
+    justifyContent: "center",
+    gap: 18,
+  },
+
+  label: {
+    fontSize: 15,
+    color: COLORS.text,
+    marginTop: 6,
+  },
+
+  inputUnderline: {
+    borderBottomWidth: 1,
+    borderColor: COLORS.text,
     fontSize: 16,
+    paddingVertical: 6,
     color: COLORS.text,
   },
-  errorInput: {
-    borderColor: COLORS.expense,
-  },
-  button: {
-    backgroundColor: COLORS.primary,
-    borderRadius: 12,
-    padding: 16,
+
+  passwordContainer: {
+    flexDirection: "row",
     alignItems: "center",
-    marginTop: 10,
-    marginBottom: 20,
+    borderBottomWidth: 1,
+    borderColor: COLORS.text,
   },
-  buttonText: {
+
+  passwordInput: {
+    flex: 1,
+    fontSize: 16,
+    paddingVertical: 6,
+    color: COLORS.text,
+  },
+
+  loginButton: {
+    backgroundColor: COLORS.primary,
+    paddingVertical: 14,
+    borderRadius: 30,
+    marginTop: 10,
+    alignItems: "center",
+  },
+
+  loginButtonText: {
     color: COLORS.white,
     fontSize: 18,
     fontWeight: "600",
   },
-  footerContainer: {
+  forgotText: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    marginTop: 10,
+  },
+  signUpText: {
+    color: COLORS.text,
+    textAlign: "center",
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center",
-    gap: 1,
-  },
-  footerText: {
-    color: COLORS.text,
-    fontSize: 16,
-  },
-  linkText: {
-    color: COLORS.primary,
-    fontSize: 16,
-    fontWeight: "600",
-  },
-  verificationContainer: {
-    flex: 1,
-    backgroundColor: COLORS.background,
-    padding: 20,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  verificationTitle: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: COLORS.text,
-    marginBottom: 20,
-    textAlign: "center",
-  },
-  verificationInput: {
-    backgroundColor: COLORS.white,
-    borderRadius: 12,
-    padding: 15,
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: COLORS.border,
-    fontSize: 16,
-    color: COLORS.text,
-    width: "100%",
-    textAlign: "center",
-    letterSpacing: 2,
-  },
-
-  // 🔴 Error styles
-  errorBox: {
-    backgroundColor: "#FFE5E5",
-    padding: 12,
-    borderRadius: 8,
-    borderLeftWidth: 4,
-    borderLeftColor: COLORS.expense,
-    marginBottom: 16,
-    flexDirection: "row",
-    alignItems: "center",
-    width: "100%",
-  },
-  errorText: {
-    color: COLORS.text,
-    marginLeft: 8,
-    flex: 1,
-    fontSize: 14,
+    marginTop: 10,
   },
 });
